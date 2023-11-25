@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+     {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <title>YouTube Downloader</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="d-flex min-vh-100 justify-content-center align-items-center">
+                <div class="row">
+                    <div>
+                        <h3>{{title}}</h3>
+                        <img src="{{thumb_video}}" id="thumb-image">
+                        <p id="file-size"> file size: {{file_size}} mb</p>
+                        <div>
+                            <form method="post" action="{% url 'download' %}">
+                                {% csrf_token %}
+                                <input hidden type="text" class="form-control" id="inputUrl" name="url" value="{{link}}">
+                                <button type="submit" class="btn btn-outline-primary btn-sm" name="download_video" id="download-button" value="download_video"> Start Download</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
