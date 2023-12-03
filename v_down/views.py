@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import FileResponse
 from pathlib import Path
 from pytube import YouTube
+from pytube.exceptions import RegexMatchError
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 downloaded_video_path = BASE_DIR / 'video_files'
@@ -12,17 +13,19 @@ def home_view(request):
 
 
 def fetch_video(request):
-    if request.POST.get('fetch_url'):
-        link = request.POST.get('url_video')
-        yt_video = YouTube(link)
-        title = yt_video.title
-        thumb_video = yt_video.thumbnail_url
-        file_size = yt_video.streams.get_highest_resolution().filesize_mb
+    try:
+        if request.POST.get('fetch_url'):
+            link = request.POST.get('url_video')
+            yt_video = YouTube(link)
+            title = yt_video.title
+            thumb_video = yt_video.thumbnail_url
+            file_size = yt_video.streams.get_highest_resolution().filesize_mb
 
-        context = {'title': title, 'thumb_video': thumb_video, 'file_size': file_size, 'link': link}
-        return render(request, 'description.html', context)
-    return render(request, 'description.html')
-
+            context = {'title': title, 'thumb_video': thumb_video, 'file_size': file_size, 'link': link}
+            return render(request, 'description.html', context)
+        return render(request, 'description.html')
+    except RegexMatchError:
+        return render(request, 'error.html')
 
 def process_video(request):
     if request.POST.get('download_video'):
