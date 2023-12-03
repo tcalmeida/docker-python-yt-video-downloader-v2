@@ -17,7 +17,7 @@
                     {% csrf_token %}
                     <div class="d-inline-flex w-100">
                         <div>
-                            <input type="text" class="form-control " id="inputUrl" name="url_video" value="{{link}}" placeholder="Enter your video URL">
+                            <input type="text" class="form-control " id="inputUrl" name="url_video" value="{{link}}" placeholder="Enter your video URL" required>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-outline-primary  ms-2" name="fetch_url" value="fetch_url">Submit</button>
