@@ -1,0 +1,23 @@
+/* index.html*/
+#inputUrl{
+    border: 1px solid grey;
+    width: 300px
+}
+#inputUrl::placeholder{
+    opacity: 0.4;
+}
+
+/* description.html*/
+#thumb-image{
+    width: 90%;
+    height: auto;
+}
+#file-size{
+    font-size: 14px;
+    font-weight: bold;
+     width: 90%;
+}
+#download-button{
+     font-weight: bold;
+}
+
