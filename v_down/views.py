@@ -19,7 +19,7 @@ def fetch_video(request):
             yt_video = YouTube(link)
             title = yt_video.title
             thumb_video = yt_video.thumbnail_url
-            file_size = yt_video.streams.get_highest_resolution().filesize_mb
+            file_size = round(yt_video.streams.get_highest_resolution().filesize_mb)
 
             context = {'title': title, 'thumb_video': thumb_video, 'file_size': file_size, 'link': link}
             return render(request, 'description.html', context)
